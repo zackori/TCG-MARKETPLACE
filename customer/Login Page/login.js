@@ -1,6 +1,16 @@
 // =====================================
 // LOGIN PAGE JAVASCRIPT
 // =====================================
+const params = new URLSearchParams(window.location.search);
+
+
+
+if(params.get("error") === "invalid"){
+
+    document.getElementById("login-error").style.display = "block";
+
+};
+
 
 const password = document.getElementById("password");
 const togglePassword = document.getElementById("togglePassword");

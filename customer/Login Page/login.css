@@ -411,3 +411,40 @@ button:hover{
     }
 
 }
+
+.login-error{
+    display: none;
+
+    background: #ff4d4f;
+    color: white;
+
+    padding: 15px 18px;
+
+    border-radius: 10px;
+
+    margin-bottom: 25px;
+
+    margin-top: 25px;
+
+    font-size: 15px;
+
+    animation: slideDown .35s ease;
+}
+
+.login-error i{
+    margin-right:8px;
+}
+
+@keyframes slideDown{
+
+    from{
+        opacity:0;
+        transform:translateY(-15px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}

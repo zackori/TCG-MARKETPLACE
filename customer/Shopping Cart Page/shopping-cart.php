@@ -1,12 +1,28 @@
 <?php
 /* ============================================================
-   Session check - drives the navbar below:
-   - Logged out: Sign In / Account / Cart all lead to login.html
-   - Logged in: Sign In is removed; Account -> account.php,
-     Cart -> shopping-cart.html
-   ============================================================ */
+  Session check - drives the navbar below:
+  - Logged out: Sign In / Account / Cart all lead to login.html
+  - Logged in: Sign In is removed; Account -> account.php,
+    Cart -> shopping-cart.html
+  ============================================================ */
 session_start();
 $isLoggedIn = isset($_SESSION['user_id']);
+
+if (!$isLoggedIn) {
+    header("Location: /tcgzone/customer/Login Page/login.html");
+    exit;
+}
+
+require '../../config/db_connect.php';
+
+$stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
+$stmt->bind_param("i", $_SESSION['user_id']);
+$stmt->execute();
+$billingProfile = $stmt->get_result()->fetch_assoc();
+
+function esc($value) {
+    return htmlspecialchars($value ?? '', ENT_QUOTES);
+}
 ?>
 
 
@@ -61,8 +77,8 @@ $isLoggedIn = isset($_SESSION['user_id']);
   <div class="container">
 
     <!-- =========================================================
-         VIEW 1 — SHOPPING CART
-         ========================================================= -->
+        VIEW 1 — SHOPPING CART
+        ========================================================= -->
     <section id="cartView">
       <h1 class="text-center text-white mb-5">Shopping Cart</h1>
 
@@ -115,8 +131,8 @@ $isLoggedIn = isset($_SESSION['user_id']);
 
 
     <!-- =========================================================
-         VIEW 2 — CHECKOUT / BILLING INFORMATION
-         ========================================================= -->
+        VIEW 2 — CHECKOUT / BILLING INFORMATION
+        ========================================================= -->
     <section id="checkoutView" class="d-none">
 
       <div class="row g-4 justify-content-center">
@@ -126,44 +142,45 @@ $isLoggedIn = isset($_SESSION['user_id']);
 
             <form id="billingForm" class="billingForm">
               <div class="row g-3">
-                <div class="col-md-6">
+              <div class="col-md-6">
                   <label class="form-label small text-secondary" style="font-family: 'Figtree', sans-serif;">First name</label>
-                  <input type="text" class="form-control" name="firstName" placeholder="Your first name" required>
+                  <input type="text" class="form-control" name="firstName" placeholder="Your first name" value="<?= esc($billingProfile['first_name']) ?>" required>
                 </div>
                 <div class="col-md-6">
                   <label class="form-label small text-secondary">Last name</label>
-                  <input type="text" class="form-control" name="lastName" placeholder="Your last name" required>
+                  <input type="text" class="form-control" name="lastName" placeholder="Your last name" value="<?= esc($billingProfile['last_name']) ?>" required>
                 </div>
 
                 <div class="col-md-2">
                   <label class="form-label small text-secondary">Zip Code</label>
-                  <input type="text" class="form-control" name="zipCode" placeholder="Zip Code" required>
+                  <input type="text" class="form-control" name="zipCode" placeholder="Zip Code" value="<?= esc($billingProfile['address_zip']) ?>" required>
                 </div>
 
                 <div class="col-md-5">
                   <label class="form-label small text-secondary">Province</label>
-                  <input type="text" class="form-control" name="province" placeholder="Province" required>
+                  <input type="text" class="form-control" name="province" placeholder="Province" value="<?= esc($billingProfile['address_province']) ?>" required>
                 </div>
 
                 <div class="col-md-5">
                   <label class="form-label small text-secondary">City</label>
-                  <input type="text" class="form-control" name="city" placeholder="City" required>
+                  <input type="text" class="form-control" name="city" placeholder="City" value="<?= esc($billingProfile['address_city']) ?>" required>
                 </div>
 
                 <div class="col-md-12">
                   <label class="form-label small text-secondary">House/Unit No., Street</label>
-                  <input type="text" class="form-control" name="city" placeholder="House/Unit No., Street" required>
+                  <input type="text" class="form-control" name="houseNumber" placeholder="House/Unit No., Street" value="<?= esc($billingProfile['address_details']) ?>" required>
                 </div>
 
                 <div class="col-md-6">
                   <label class="form-label small text-secondary">Email</label>
-                  <input type="email" class="form-control" name="email" placeholder="Email Address" required>
+                  <input type="email" class="form-control" name="email" placeholder="Email Address" value="<?= esc($billingProfile['email']) ?>" required>
                 </div>
                 <div class="col-md-6">
                   <label class="form-label small text-secondary">Phone</label>
-                  <input type="tel" class="form-control" name="phone" placeholder="Phone number" required>
+                  <input type="tel" class="form-control" name="phone" placeholder="Phone number" pattern="[0-9]*" maxlength="11"  minlength="11" value="<?= esc($billingProfile['phone']) ?>" required>
                 </div>
               </div>
+
 
               <h5 class="text-white mt-4 mb-2">Additional Info</h5>
               <label class="form-label small text-secondary">Order Notes (Optional)</label>

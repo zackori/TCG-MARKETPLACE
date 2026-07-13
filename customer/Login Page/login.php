@@ -16,9 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $email    = trim($_POST['email'] ?? '');
 $password = $_POST['password'] ?? '';
 
-if ($email === '' || $password === '') {
-    die("Please fill in all fields. <a href='/tcgzone/customer/Login Page/login.html'>Go back</a>");
-}
 
 $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
 $stmt->bind_param("s", $email);
@@ -27,7 +24,8 @@ $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
 if (!$user || !password_verify($password, $user['password_hash'])) {
-    die("Incorrect email or password. <a href='/tcgzone/customer/Login Page/login.html'>Go back</a>");
+    header("Location: login.html?error=invalid");
+    exit;
 }
 
 $_SESSION['user_id']  = $user['id'];

@@ -1,3 +1,45 @@
+
+
+const params = new URLSearchParams(window.location.search);
+
+function showError(id){
+
+    const error = document.getElementById(id);
+
+    error.classList.add("show");
+
+    setTimeout(() => {
+
+        error.classList.add("hide");
+
+        setTimeout(() => {
+
+            error.classList.remove("show", "hide");
+
+        }, 400); // matches the CSS transition time
+
+    }, 5000);
+
+}
+
+if (params.has("match")) {
+    showError("match-error");
+}
+
+if (params.has("password")) {
+    showError("password-error");
+}
+
+if (params.has("email")) {
+    showError("email-error");
+}
+
+if (params.has("username")) {
+    showError("username-error");
+}
+
+
+
 // ======================================
 // PASSWORD TOGGLE
 // ======================================
@@ -22,6 +64,11 @@ togglePassword.addEventListener("click", function () {
     }
 
 });
+
+
+
+
+
 
 // ======================================
 // ONLY ACCEPTS NUMBERS FOR PHONE NUMBER

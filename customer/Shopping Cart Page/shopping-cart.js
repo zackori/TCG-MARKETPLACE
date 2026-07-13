@@ -159,7 +159,6 @@ function getBillingData() {
   return {
     firstName: formData.get("firstName")?.trim(),
     lastName: formData.get("lastName")?.trim(),
-    streetAddress: formData.get("streetAddress")?.trim(),
     zipCode: formData.get("zipCode")?.trim(),
     province: formData.get("province")?.trim(),
     city: formData.get("city")?.trim(),
@@ -172,7 +171,7 @@ function getBillingData() {
 }
 
 function validateBilling(data) {
-  const required = ["firstName", "lastName", "streetAddress", "zipCode", "province", "city", "houseNumber", "email", "phone"];
+  const required = ["firstName", "lastName", "zipCode", "province", "city", "houseNumber", "email", "phone"];
   const missing = required.filter((field) => !data[field]);
 
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email || "");
@@ -224,14 +223,16 @@ placeOrderBtn.addEventListener("click", async () => {
 });
 
 // ---- 8. DATABASE CALL ----------------------------------------------------
-// This is the single place that talks to your backend. Point it at your
-// real API route (e.g. an Express/PHP/Node endpoint) that inserts the
-// customer + order info into your database (MySQL, Postgres, MongoDB, etc).
+// Sends the billing form straight to update_billing.php as normal form
+// data (FormData, not JSON) — same $_POST style as save_profile.php on
+// the Account page. This updates the user's profile row with whatever
+// was typed/edited in the billing form here.
 async function sendOrderToDatabase(order) {
-  const response = await fetch("/api/orders", {
+  const formData = new FormData(billingForm);
+
+  const response = await fetch("update_billing.php", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(order)
+    body: formData
   });
 
   if (!response.ok) {

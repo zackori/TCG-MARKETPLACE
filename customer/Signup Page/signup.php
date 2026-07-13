@@ -22,27 +22,42 @@ $phone            = trim($_POST['phone'] ?? '');
 $password         = $_POST['password'] ?? '';
 $confirmPassword  = $_POST['confirmPassword'] ?? '';
 
-// ---- Validation ---------------------------------------------------------
-if ($email === '' || $username === '' || $password === '' || $confirmPassword === '') {
-    die("Please complete all fields. <a href='/tcgzone/customer/Signup Page/signup.html'>Go back</a>");
-}
 
+$error = [];
+
+// ---- Validation ---------------------------------------------------------
 if ($password !== $confirmPassword) {
-    die("Passwords do not match. <a href='/tcgzone/customer/Signup Page/signup.html'>Go back</a>");
+    $errors['match'] = 1;
 }
 
 if (strlen($password) < 8) {
-    die("Password must be at least 8 characters. <a href='/tcgzone/customer/Signup Page/signup.html'>Go back</a>");
+    $errors['password'] = 1;
 }
 
-// ---- Check for existing email/username -----------------------------------
-$check = $conn->prepare("SELECT id FROM users WHERE email = ? OR username = ?");
-$check->bind_param("ss", $email, $username);
-$check->execute();
-$existing = $check->get_result();
 
-if ($existing->num_rows > 0) {
-    die("An account with that email or username already exists. <a href='/tcgzone/customer/Signup Page/signup.html'>Go back</a>");
+// ---- Check for existing email/username -----------------------------------
+// Check email
+$checkEmail = $conn->prepare("SELECT id FROM users WHERE email = ?");
+$checkEmail->bind_param("s", $email);
+$checkEmail->execute();
+
+if ($checkEmail->get_result()->num_rows > 0) {
+    $errors['email'] = 1;
+}
+
+// Check username
+$checkUsername = $conn->prepare("SELECT id FROM users WHERE username = ?");
+$checkUsername->bind_param("s", $username);
+$checkUsername->execute();
+
+if ($checkUsername->get_result()->num_rows > 0) {
+    $errors['username'] = 1;
+}
+
+
+if (!empty($errors)) {
+    header("Location: signup.html?" . http_build_query($errors));
+    exit;
 }
 
 // ---- Insert the new user --------------------------------------------------

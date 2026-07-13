@@ -30,6 +30,9 @@ $address_province = $_POST['address_province'] ?? '';
 $address_zip      = $_POST['address_zip'] ?? '';
 $gender           = $_POST['gender'] ?? 'Male';
 
+$newPassword      = $_POST['new_password'] ?? '';
+$confirmPassword  = $_POST['confirm_password'] ?? '';
+
 if ($dob === '') {
     $dob = null;
 }
@@ -52,6 +55,23 @@ $stmt->bind_param(
 );
 
 $stmt->execute();
+
+// 2. 🌟 PROCESS NEW PASSWORD IF USER SENT ONE
+if (!empty($newPassword)) {
+    // Only update if passwords match and satisfy length requirements
+    if ($newPassword === $confirmPassword && strlen($newPassword) >= 8) {
+        $passwordHash = password_hash($newPassword, PASSWORD_DEFAULT);
+        
+        $pwdStmt = $conn->prepare("UPDATE users SET password_hash = ? WHERE id = ?");
+        $pwdStmt->bind_param("si", $passwordHash, $userId);
+        $pwdStmt->execute();
+    } else {
+        // Optional error fallback query string (e.g. passwords mismatched/too short)
+        header("Location: account.php?error=password_invalid");
+        exit;
+    }
+}
+
 
 header("Location: /tcgzone/customer/Landing Page/index.php");
 exit;

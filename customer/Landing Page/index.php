@@ -1,10 +1,10 @@
 <?php
 /* ============================================================
-   Session check - drives the navbar below:
-   - Logged out: Sign In / Account / Cart all lead to login.html
-   - Logged in: Sign In is removed; Account -> account.php,
-     Cart -> shopping-cart.html
-   ============================================================ */
+Session check - drives the navbar below:
+- Logged out: Sign In / Account / Cart all lead to login.html
+- Logged in: Sign In is removed; Account -> account.php,
+    Cart -> shopping-cart.html
+============================================================ */
 session_start();
 $isLoggedIn = isset($_SESSION['user_id']);
 ?>
@@ -45,7 +45,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
             
             <div class="nav-bottom">
                 <ul class="sub-links">
-                    <li><a href="/tcgzone/customer/Shop Page/shop-page.html">Shop</a></li>
+                    <li><a href="/tcgzone/customer/Shop Page/shop.php">Shop</a></li>
                     <li>|</li>
                     <li><a href="#" class="category"><span>Pokémon</span></a></li>
                     <li><a href="#" class="category"><span>Magic</span></a></li>
@@ -272,7 +272,13 @@ $isLoggedIn = isset($_SESSION['user_id']);
             <div class="review-card h-100">
             <div><img class="review-avatar" src="/tcgzone/assets/images/landing page/image 17.png" alt="Image 17"></div>
             <h3 class="review-name text-white">Slime na cute</h3>
-            <div class="review-stars">★★★★★</div>
+            <div class="review-stars">
+                    <img src="/tcgzone/assets/logos/review/poke-open.svg" alt="Pokeball">
+                    <img src="/tcgzone/assets/logos/review/poke-open.svg" alt="Pokeball">
+                    <img src="/tcgzone/assets/logos/review/poke-open.svg" alt="Pokeball">
+                    <img src="/tcgzone/assets/logos/review/poke-open.svg" alt="Pokeball">
+                    <img src="/tcgzone/assets/logos/review/poke-open.svg" alt="Pokeball">
+            </div>
             <p class="review-text">"Absolutely love this marketplace! Found a near-mint Zekrom ex from Black Bolt in under 10 minutes and the price was better than everywhere else. Fast shipping and the card condition was exactly as described. Already bought 3 more cards. Highly recommended for serious collectors!"</p>
             </div>
         </div>
@@ -281,7 +287,13 @@ $isLoggedIn = isset($_SESSION['user_id']);
             <div class="review-card h-100">
             <div><img class="review-avatar" src="/tcgzone/assets/images/landing page/image 17.png" alt="17"></div>
             <h3 class="review-name text-white">Ditto</h3>
-            <div class="review-stars">★★★★★</div>
+            <div class="review-stars">
+                    <img src="/tcgzone/assets/logos/review/poke-open.svg" alt="Pokeball">
+                    <img src="/tcgzone/assets/logos/review/poke-open.svg" alt="Pokeball">
+                    <img src="/tcgzone/assets/logos/review/poke-open.svg" alt="Pokeball">
+                    <img src="/tcgzone/assets/logos/review/poke-open.svg" alt="Pokeball">
+                    <img src="/tcgzone/assets/logos/review/poke-open.svg" alt="Pokeball">
+            </div>
             <p class="review-text">"Amazing experience from start to finish! Picked up a pristine Reshiram ex from White Flare without any hassle, and the pricing was surprisingly affordable. The packaging was secure, shipping was quick, and the card looked flawless. Will definitely keep coming back for future releases!"</p>
             </div>
         </div>
@@ -290,7 +302,13 @@ $isLoggedIn = isset($_SESSION['user_id']);
             <div class="review-card h-100">
             <div><img class="review-avatar" src="/tcgzone/assets/images/landing page/image 17.png" alt="17"></div>
             <h3 class="review-name text-white">Ditto  ka na lang</h3>
-            <div class="review-stars">★★★★★</div>
+            <div class="review-stars">
+                    <img src="/tcgzone/assets/logos/review/poke-open.svg" alt="Pokeball">
+                    <img src="/tcgzone/assets/logos/review/poke-open.svg" alt="Pokeball">
+                    <img src="/tcgzone/assets/logos/review/poke-open.svg" alt="Pokeball">
+                    <img src="/tcgzone/assets/logos/review/poke-open.svg" alt="Pokeball">
+                    <img src="/tcgzone/assets/logos/review/poke-open.svg" alt="Pokeball">
+            </div>
             <p class="review-text">"Couldn't be happier with my purchase! Finally completed my Scarlet & Violet collection thanks to the wide selection available here. Everything arrived on time, carefully protected, and in excellent condition. Great service, fair prices, and an awesome marketplace for Pokémon TCG fans!"</p>
             </div>
         </div>
@@ -298,7 +316,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
         </div>
 
         <div class="text-center mt-5">
-        <a href="/tcgzone/customer/Review Page/review.html" class="btn btn-buy-now">Leave a Review!</a>
+        <a href="/tcgzone/customer/Review Page/review.php" class="btn btn-buy-now">Leave a Review!</a>
         </div>
     </div>
 </section>

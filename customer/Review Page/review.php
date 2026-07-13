@@ -1,3 +1,23 @@
+<?php
+/* ============================================================
+   Session check - drives the navbar below:
+   - Logged out: Sign In / Account / Cart all lead to login.html
+   - Logged in: Sign In is removed; Account -> account.php,
+     Cart -> shopping-cart.html
+   ============================================================ */
+session_start();
+$isLoggedIn = isset($_SESSION['user_id']);
+
+// Same guard as account.php / shopping-cart.php: block the page
+// itself for logged-out users, not just the Submit button. This
+// covers every way someone might land here — the navbar link,
+// a direct URL, a bookmark — not just clicking through normally.
+if (!$isLoggedIn) {
+    header("Location: /tcgzone/customer/Login Page/login.html");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,19 +42,21 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         <nav class="navbar">
             <div class="nav-top">
                 <div class="logo col-auto">
-                    <h1><a href="/tcgzone/customer/Landing Page/index.html">tcgzone</a></h1>
+                    <h1><a href="/tcgzone/customer/Landing Page/index.php">tcgzone</a></h1>
                 </div>
                 <div class="search col-11 col-sm-6 col-md-5">
                     <input class="search-input" type="text">
                     <img src="/tcgzone/assets/logos/navbar/magnifying-glass.svg" alt="Search Icon">
                 </div>
                 <ul class="nav-links col-auto">
-                    <li> <a href="/tcgzone/customer/Login Page/signup-login.html">Sign In</a></li>
+                    <?php if (!$isLoggedIn): ?>
+                    <li> <a href="/tcgzone/customer/Login Page/login.html">Sign In</a></li>
+                    <?php endif; ?>
                     <div class="btn-logo">
-                        <li"><a href="#" data-nav="account"><img src="/tcgzone/assets/logos/navbar/user.svg" alt="Account" class="nav-icon"></a></li>
+                        <li><a href="<?= $isLoggedIn ? '/tcgzone/customer/Account/account.php' : '/tcgzone/customer/Login Page/login.html' ?>"><img src="/tcgzone/assets/logos/navbar/user.svg" alt="Account" class="nav-icon"></a></li>
                     </div>
-                    <div class="btn-logo2">
-                        <li><a href="/tcgzone/customer/Shopping Cart Page/shopping-cart.html"> <img src="/tcgzone/assets/logos/navbar/shopping-cart.svg" class="nav-icon" alt="Shopping Cart"></a></li>
+                    <div class="btn-logo">
+                        <li><a href="<?= $isLoggedIn ? '/tcgzone/customer/Shopping Cart Page/shopping-cart.php' : '/tcgzone/customer/Login Page/login.php' ?>"> <img src="/tcgzone/assets/logos/navbar/shopping-cart.svg" class="nav-icon" alt="Shopping Cart"></a></li>
                     </div>
                 </ul>
             </div>
@@ -51,94 +73,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
             </div> 
         </nav>
 
-        <!-- ========================= ACCOUNT TAB ========================= -->
-        <!-- Opens when the navbar Account icon (data-nav="account") is clicked.
-            Styles live in shared.css, behavior lives in shared.js.
-            No close (X) / backdrop-click — the only way out is clicking Save. -->
-        <div class="profile-overlay" id="profileOverlay" style="display:none;">
-            <div class="profile-panel">
 
-                <div class="profile-header">
-                    <h2 >My Profile</h2>
-                    <p>Manage your profile</p>
-                </div>
-
-                <div class="profile-card">
-                    <form class="profile-form" id="profileForm" novalidate>
-
-                        <div class="form-row">
-                            <label>Username</label>
-                            <span class="static-value" id="usernameValue">lleve</span>
-                        </div>
-
-                        <div class="form-row">
-                            <label for="nameInput">Name</label>
-                            <input type="text" id="nameInput" name="name" class="text-input" placeholder="Your Name">
-                        </div>
-
-                        <div class="form-row">
-                            <label>Email</label>
-                            <div class="editable-field" data-field="email">
-                                <span class="static-value" data-static="email">lleve@gmail.com</span>
-                                <input type="email" class="text-input hidden-input" data-input="email" value="zhainnaaa@gmail.com">
-                                <a href="#" class="change-link" data-target="email">Change</a>
-                                <a href="#" class="cancel-link" data-target="email">Cancel</a>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <label>Phone Number</label>
-                            <div class="editable-field" data-field="phone">
-                                <span class="static-value" data-static="phone">09XX-XXX-XXXX</span>
-                                <input type="text" class="text-input hidden-input" data-input="phone" value="09XX-XXX-XXXX">
-                                <a href="#" class="change-link" data-target="phone">Change</a>
-                                <a href="#" class="cancel-link" data-target="phone">Cancel</a>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <label>Date of Birth</label>
-                            <div class="editable-field" data-field="dob">
-                                <span class="static-value" data-static="dob">12-02-2005</span>
-                                <input type="date" class="text-input hidden-input" data-input="dob" value="2005-02-12">
-                                <a href="#" class="change-link" data-target="dob">Change</a>
-                                <a href="#" class="cancel-link" data-target="dob">Cancel</a>
-                            </div>
-                        </div>
-
-
-                        <div class="form-row">
-                            <label>Shipping Address</label>
-                            <div class="editable-field" data-field="address">
-                                <span class="static-value" data-static="address">No address on file</span>
-                                <div class="address-fields">
-                                    <input type="text" class="text-input address-input" data-input="addressDetails" placeholder="ZIP Code">
-                                    <input type="text" class="text-input address-input" data-input="addressCity" placeholder="Province">
-                                    <input type="text" class="text-input address-input" data-input="addressProvince" placeholder="City">
-                                    <input type="text" class="text-input address-input" data-input="addressZip" placeholder="House/Unit No., Street">
-                                </div>
-                                <a href="#" class="change-link" data-target="address">Change</a>
-                                <a href="#" class="cancel-link" data-target="address">Cancel</a>
-                            </div>
-                        </div>
-
-                        <div class="form-row gender-row">
-                            <label>Gender</label>
-                            <div class="gender-options">
-                                <label class="radio-label"><input type="radio" name="gender" value="Male" checked> Male</label>
-                                <label class="radio-label"><input type="radio" name="gender" value="Female"> Female</label>
-                                <label class="radio-label"><input type="radio" name="gender" value="Other"> Other</label>
-                            </div>
-                        </div>
-
-                        <div class="form-actions">
-                            <button type="submit" class="btn-save">Save</button>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        </div>
 
 <div class="container mt-5 mb-5">
 
@@ -262,6 +197,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 <!-- JavaScript -->
 <script src="/tcgzone/bootstrap/bootstrap-5.3.8-dist/js/bootstrap.min.js"></script>
 <script src="/tcgzone/assets/js/shared/shared.js"></script>
+<script>
+    const isLoggedIn = <?= $isLoggedIn ? 'true' : 'false' ?>;
+</script>
 <script src="review.js"></script>
 
 </body>

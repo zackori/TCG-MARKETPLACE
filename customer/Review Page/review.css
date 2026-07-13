@@ -118,19 +118,13 @@ body{
 
 /* Hover */
 
-/* .rating label:hover,
-.rating label:hover ~ label{
-
-    color:#FFD700;
-    transform:scale(1.2);
-} */
-
-/* Selected */
-
-/* .rating input:checked ~ label{
-
-    color:#f8c923;
-} */ */
+.rating-icon{
+    width:18px;
+    height:18px;
+    vertical-align:middle;
+    margin-left:0px;
+    padding-bottom: 2px;
+}
 
 form{
 

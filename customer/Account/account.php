@@ -143,6 +143,26 @@ $nameDisplay = $nameParts ? implode(" ", $nameParts) : "No name on file";
                     </div>
                 </div>
 
+                <!-- Password Change Row -->
+                <div class="form-row">
+                    <label>Password</label>
+                    <div class="editable-field" data-field="password">
+                        <!-- Default display masking password visually -->
+                        <span class="static-value" data-static="password">********</span>
+                        
+                        <div class="address-fields">
+                            <input type="password" name="new_password" class="text-input address-input"
+                                data-input="newPassword" placeholder="New Password" value="">
+                            <input type="password" name="confirm_password" class="text-input address-input"
+                                data-input="confirmPassword" placeholder="Confirm New Password" value="">
+                        </div>
+                        
+                        <a href="#" class="change-link" data-target="password">Change</a>
+                        <a href="#" class="cancel-link" data-target="password">Cancel</a>
+                    </div>
+                </div>
+
+
                 <div class="form-row gender-row">
                     <label>Gender</label>
                     <div class="gender-options">
@@ -185,10 +205,12 @@ document.querySelectorAll(".change-link").forEach((link) => {
     });
 });
 
+
 document.querySelectorAll(".cancel-link").forEach((link) => {
     link.addEventListener("click", (e) => {
         e.preventDefault();
         const wrapper = link.closest(".editable-field");
+        
         if (wrapper.dataset.revert) {
             const revertData = JSON.parse(wrapper.dataset.revert);
             Object.keys(revertData).forEach((key) => {
@@ -196,6 +218,12 @@ document.querySelectorAll(".cancel-link").forEach((link) => {
                 if (input) input.value = revertData[key];
             });
         }
+        
+        // 🌟 ADDITION: If canceling password editing, wipe values out completely
+        if (wrapper.dataset.field === "password") {
+            wrapper.querySelectorAll("input").forEach(inp => inp.value = "");
+        }
+        
         wrapper.classList.remove("editing");
     });
 });

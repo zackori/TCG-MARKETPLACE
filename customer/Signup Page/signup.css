@@ -409,3 +409,75 @@ button:hover{
     }
 
 }
+
+
+
+.notification-container{
+    position: fixed;
+    top: 20px;
+    left: 20px;
+
+    padding-left: 550px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    z-index: 9999;
+}
+
+.login-error{
+
+    display: none;
+
+    width: 320px;
+
+    background: #ff4d4f;
+    color: white;
+
+    padding: 15px 18px;
+
+    border-radius: 10px;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,.2);
+
+    opacity: 0;
+    transform: translateY(-15px);
+
+    transition: opacity .4s ease, transform .4s ease;
+}
+
+.login-error i{
+    margin-right:8px;
+}
+
+.login-error.show{
+
+    display: block;
+
+    opacity: 1;
+    transform: translateY(0);
+
+}
+
+.login-error.hide{
+
+    opacity: 0;
+    transform: translateY(-15px);
+
+}
+
+
+/* @keyframes slideDown{
+
+    from{
+        opacity:0;
+        transform:translateY(-15px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+} */
