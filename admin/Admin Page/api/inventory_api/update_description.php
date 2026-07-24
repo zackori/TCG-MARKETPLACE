@@ -40,8 +40,10 @@ try {
     if (!is_array($products)) throw new RuntimeException('products.json contains invalid JSON.');
 
     $found = false;
+    $expectedTitle = trim($productMeta['title'] ?? '');
     foreach ($products as &$product) {
-        if (($product['id'] ?? '') === $productId) {
+        if (($product['id'] ?? '') === $productId
+            && ($expectedTitle === '' || ($product['title'] ?? '') === $expectedTitle)) {
             $product['description'] = $description;
             $product['requirements'] = $requirements;
             $product['cardType'] = trim($productMeta['productType'] ?? $product['cardType'] ?? 'Cards');

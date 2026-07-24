@@ -134,7 +134,8 @@ body {
 .stock-badge {
     padding: 4px 8px;
     border-radius: 11px;
-    font-size: .7rem
+    font-size: .7rem;
+    white-space: nowrap;
 }
 
 .in-stock {
@@ -150,6 +151,10 @@ body {
 .out-of-stock {
     color: #ff6767;
     background: #461515
+}
+
+.actions1{ 
+    white-space: nowrap; 
 }
 
 .action-edit,

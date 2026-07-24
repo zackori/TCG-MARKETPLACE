@@ -119,7 +119,6 @@ body{
     align-items:center;
     gap:15px;
 }
-
 .profile i{
     font-size:20px;
 }
@@ -1248,8 +1247,8 @@ canvas{
     color: #fff;
 }
 
-.modal-btn.reject {
-    background: #dc3545;
+.modal-btn.add {
+    background: #e2aa02;
     color: #fff;
 }
 
@@ -1344,7 +1343,8 @@ padding:14px 16px;
 
 .cards,
 .orders-cards,
-.users-cards{
+.users-cards,
+.procurement-cards{
 
 grid-template-columns:1fr;
 

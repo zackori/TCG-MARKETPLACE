@@ -1667,9 +1667,9 @@
         "image": "",
         "price": 300000,
         "marketPrice": 0,
-        "cardType": "Cards",
-        "rarity": "",
-        "condition": "",
+        "cardType": "Leader",
+        "rarity": "L",
+        "condition": "Mint",
         "stock": "1",
         "category": "One Piece",
         "requirements": [
@@ -1680,6 +1680,26 @@
             {
                 "label": "Rarity",
                 "value": "L"
+            },
+            {
+                "label": "Color",
+                "value": "Blue"
+            },
+            {
+                "label": "Card Type",
+                "value": "Leader"
+            },
+            {
+                "label": "Life",
+                "value": "5"
+            },
+            {
+                "label": "Subtype(s)",
+                "value": "Kuja Pirates The Seven Warlords of the Sea"
+            },
+            {
+                "label": "Attribute",
+                "value": "Special"
             }
         ]
     },
@@ -1696,36 +1716,195 @@
         "condition": "Mint",
         "stock": "3",
         "category": "One Piece",
-        "requirements": []
-    },
-    {
-        "id": "prod-49",
-        "title": "Gengar",
-        "subtitle": "Fossil",
-        "description": "0",
-        "image": "/tcgzone/assets/images/sell/sell_6a6341ea84f905.73835144_gengar-rare.jpg",
-        "price": 15,
-        "marketPrice": 15,
-        "cardType": "Cards",
-        "rarity": "Rare",
-        "condition": "Near Mint",
-        "stock": "2",
-        "category": "Pokémon",
-        "requirements": []
+        "requirements": [
+            {
+                "label": "[Activate:Main]",
+                "value": "You may rest this Character and place 2 cards from your trash at the bottom of your deck in any order. If your opponent has 6 or more cards in their hand, your opponent trashes 1 card from their hand."
+            },
+            {
+                "label": "Rarity",
+                "value": "R"
+            },
+            {
+                "label": "Number",
+                "value": "OP05-082"
+            },
+            {
+                "label": "Color",
+                "value": "Black"
+            },
+            {
+                "label": "Card Type",
+                "value": "Character"
+            },
+            {
+                "label": "Cost",
+                "value": "1"
+            },
+            {
+                "label": "Power",
+                "value": "0"
+            },
+            {
+                "label": "Subtype(s)",
+                "value": "Merfolk"
+            },
+            {
+                "label": "Counter+",
+                "value": "2000"
+            },
+            {
+                "label": "Attribute",
+                "value": "Wisdom"
+            }
+        ]
     },
     {
         "id": "prod-49",
         "title": "Vaporeon V - SWSH181 - SWSH: Sword & Shield Promo Cards (SWSD)",
         "subtitle": "SWSH: Sword & Shield Promo Cards",
-        "description": "0",
+        "description": "",
         "image": "/tcgzone/assets/images/sell/sell_6a63439a30e772.93754316_253416_in_1000x1000.jpg",
         "price": 19050,
         "marketPrice": 15000,
         "cardType": "Cards",
-        "rarity": "rare",
-        "condition": "near-mint",
+        "rarity": "Rare",
+        "condition": "Near Mint",
         "stock": "2",
         "category": "Pokémon",
-        "requirements": []
+        "requirements": [
+            {
+                "label": "Card Number / Rarity",
+                "value": "SWSH181 / Rare"
+            },
+            {
+                "label": "Card Type / HP / Stage",
+                "value": "Water / 210 / Basic"
+            },
+            {
+                "label": "Attack 1",
+                "value": "[1] Triple Draw <br>\nSwitch this Pokémon with 1 of your Benched Pokémon."
+            },
+            {
+                "label": "Weakness / Resistance / Retreat Cost",
+                "value": "Lx2 / None / 2"
+            }
+        ]
+    },
+    {
+        "id": "prod-50",
+        "title": "Espeon V - SWSH07: Evolving Skies (SWSH07)",
+        "subtitle": "",
+        "description": "",
+        "image": "",
+        "price": 52.3,
+        "marketPrice": 0,
+        "cardType": "Cards",
+        "rarity": "Ultra Rare",
+        "condition": "Mint",
+        "stock": "8",
+        "category": "Pokémon",
+        "requirements": [
+            {
+                "label": "Card Number / Rarity",
+                "value": "/ Ultra Rare"
+            },
+            {
+                "label": "Card Type / HP / Stage",
+                "value": "Psychic / 200 / Basic"
+            },
+            {
+                "label": "Attack 1",
+                "value": "[P] Zen Shot <br>\nThis attack does 60 damage to 1 of your opponent's Pokemon V. (Don't apply Weakness and Resistance for Benched Pokemon.)"
+            }
+        ]
+    },
+    {
+        "id": "prod-46",
+        "title": "Perona (036) - Royal Blood Release Event Cards (OP10 RE)",
+        "subtitle": "",
+        "description": "",
+        "image": "",
+        "price": 800,
+        "marketPrice": 0,
+        "cardType": "Character",
+        "rarity": "C",
+        "condition": "Near Mint",
+        "stock": "2",
+        "category": "One Piece",
+        "requirements": [
+            {
+                "label": "[Your Turn] [Once Per Turn]",
+                "value": "If a Character is rested by your effect, set up to 1 of your DON!! cards as active."
+            },
+            {
+                "label": "Rarity",
+                "value": "C"
+            },
+            {
+                "label": "Number",
+                "value": "OP10-036"
+            },
+            {
+                "label": "Color",
+                "value": "Green"
+            },
+            {
+                "label": "Cost",
+                "value": "4"
+            },
+            {
+                "label": "Power",
+                "value": "5000"
+            },
+            {
+                "label": "Subtype(s)",
+                "value": "Thriller Bark Pirates ODYSSEY Muggy Kingdom"
+            },
+            {
+                "label": "Counter+",
+                "value": "1000"
+            },
+            {
+                "label": "Attribute",
+                "value": "Special"
+            }
+        ]
+    },
+    {
+        "id": "prod-51",
+        "title": "Espeon V - SWSH201 - SWSH: Sword & Shield Promo Cards (SWSD)",
+        "subtitle": "SWSH: Sword & Shield Promo Cards",
+        "description": "",
+        "image": "/tcgzone/assets/images/sell/sell_6a635ea7b35cc9.29410445_268710_in_1000x1000.jpg",
+        "price": 42,
+        "marketPrice": 38,
+        "cardType": "Cards",
+        "rarity": "Rare",
+        "condition": "Mint",
+        "stock": "1",
+        "category": "Pokémon",
+        "requirements": [
+            {
+                "label": "Card Number / Rarity",
+                "value": "SWSH201 / Promo"
+            },
+            {
+                "label": "Card Type / HP / Stage",
+                "value": "Psychic / 200 / Basic"
+            },
+            {
+                "label": "Attack 1",
+                "value": "[P] Zen Shot <br>\nThis attack does 60 damage to 1 of your opponent's Pokemon V. (Don't apply Weakness and Resistance for Benched Pokemon.)"
+            },
+            {
+                "label": "Attack 2",
+                "value": "[2P] Super Psy Bolt (120)"
+            },
+            {
+                "label": "Weakness / Resistance / Retreat Cost",
+                "value": "Dx2 / F-30 / 1"
+            }
+        ]
     }
 ]
